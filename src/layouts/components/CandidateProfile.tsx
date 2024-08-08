@@ -1,5 +1,5 @@
 // ** React Imports
-import React, { ReactNode, useEffect, useState } from 'react'
+import React, { ReactNode, useEffect, useState, useRef } from 'react'
 import { Theme, useTheme } from '@mui/material/styles'
 // ** MUI Components
 import {
@@ -174,6 +174,8 @@ const CandidateProfile = (props: compProps) => {
   } else {
     opp = { id: '1', label: 'Open to Work' }
   }
+
+  const formRef = useRef<any>(null)
   const [hookSignature, setHookSignature] = useState(v4())
 
   const [combocountry, getComboCountry] = useState<any>([])
@@ -185,13 +187,12 @@ const CandidateProfile = (props: compProps) => {
   const [comboShip, getShip] = useState<any>([])
   const [comboOPP, getOpp] = useState<any>([])
   const [combocity, getComboCity] = useState<any[]>([])
-  const [combocode, getCombocode] = useState<any[]>([])
+
   const [combokelamin, getCombokelamin] = useState<any[]>([])
   const [idcombokelamin, setCombokelamin] = useState<any>(
     props.datauser?.gender == 'f' ? { title: 'f', label: 'Female' } : { title: 'm', label: 'Male' }
   )
 
-  const [idcombocode, setCombocode] = useState<any>(props.datauser?.country_id)
   const [idcity, setCombocity] = useState<any>(props.datauser.address?.city_id)
   const [idship, setShip] = useState<any>(
     props.datauser?.employee_type == 'offship'
@@ -308,15 +309,6 @@ const CandidateProfile = (props: compProps) => {
       const code = response.data.user
       setPreview(code.photo)
       setPreviewBanner(code.banner)
-    })
-
-    HttpClient.get(AppConfig.baseUrl + '/public/data/country?search=').then(response => {
-      const code = response.data.countries
-      for (let x = 0; x < code.length; x++) {
-        const element = code[x]
-        element.label = element.name + '(' + element.phonecode + ')'
-      }
-      getCombocode(code)
     })
 
     HttpClient.get(AppConfig.baseUrl + '/user/sosmed?page=1&take=100').then(response => {
@@ -563,7 +555,7 @@ const CandidateProfile = (props: compProps) => {
 
     availabledate = date
     const json = {
-      country_id: idcombocode,
+      country_id: idcountry,
       employee_type: idship,
       name: fullName,
       phone: phoneNum,
@@ -661,8 +653,6 @@ const CandidateProfile = (props: compProps) => {
   const displayopp = (type: any) => {
     setOpp(type?.id)
   }
-
-  console.log(' idComboProvince => ', idcomboProvince)
 
   return (
     <Grid container md={12} xs={12} padding={5}>
@@ -802,7 +792,7 @@ const CandidateProfile = (props: compProps) => {
         </Menu>
       </CardContent>
 
-      <form id='profile-form' noValidate autoComplete='off' onSubmit={handleSubmit(onSubmit)}>
+      <form noValidate autoComplete='off' onSubmit={handleSubmit(onSubmit)} ref={formRef}>
         <Grid className='profile-form' item container xs={12} spacing={3} sx={{ mb: 2 }} marginTop={'25px'}>
           <Grid item md={6} xs={12}>
             <TextField
@@ -938,6 +928,7 @@ const CandidateProfile = (props: compProps) => {
               sx={{ mb: 1 }}
               type='number'
               value={phoneNum}
+              {...register('phone')}
               onChange={e => onChangePhoneNum(e.target.value)}
             />
           </Grid>
@@ -1247,6 +1238,7 @@ const CandidateProfile = (props: compProps) => {
                     }
                   />
                 </Grid>
+
                 {tampilkanship == 'PELAUT' ? (
                   <Grid item md={6} xs={12}>
                     <Autocomplete
@@ -1368,11 +1360,14 @@ const CandidateProfile = (props: compProps) => {
       <Grid item container lg={12} md={12} xs={12}>
         <Grid item container direction='row' justifyContent='flex-end' alignItems='right' md={12} lg={12} xs={12}>
           <Button
-            form='profile-form'
+            onClick={e => {
+              e.preventDefault()
+              formRef?.current.requestSubmit()
+            }}
             variant='contained'
             color='success'
             size='small'
-            type='submit'
+            type='button'
             sx={{ mt: 7, mb: 7 }}
           >
             <Icon
