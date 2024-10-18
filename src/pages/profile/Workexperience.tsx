@@ -49,7 +49,7 @@ const renderList = (arr: ParamJobVacncy[]) => {
               }}
             />
             <Grid item container xs={true} md={true} sx={{ flexGrow: '1' }}>
-              <Box sx={{ columnGap: 2, flexWrap: 'wrap', alignItems: 'center', m: 2 }}>
+              <Box sx={{ width: '100%', columnGap: 2, flexWrap: 'wrap', alignItems: 'center', m: 2 }}>
                 <Box sx={{ width: '100%', display: 'flex', justifyContent: 'space-between' }}>
                   <Typography
                     sx={{ color: 'rgba(45, 52, 54, 1)', fontWeight: 700, fontSize: '16px', lineHeight: '21px' }}
@@ -66,31 +66,33 @@ const renderList = (arr: ParamJobVacncy[]) => {
                   {item.position?.charAt(0).toUpperCase() + item.position?.slice(1)}
                 </Typography>
 
-                <Grid item xs={12}>
-                  <Typography
-                    variant='body2'
-                    align='justify'
-                    sx={{
-                      color: 'rgba(45, 52, 54, 1)',
-                      fontSize: '14px',
-                      mt: 2,
-                      whiteSpace: 'pre-line',
-                      fontWeight: 400
-                    }}
-                  >
-                    {expand ? item.description : `${item.description?.slice(0, maxChars)}`}
-                    {!expand && (
-                      <span
-                        onClick={() => {
-                          setExpand(true)
-                        }}
-                        style={{ cursor: 'pointer', color: 'whiteblue' }}
-                      >
-                        ...see more
-                      </span>
-                    )}
-                  </Typography>
-                </Grid>
+                {item?.description && (
+                  <Grid item xs={12}>
+                    <Typography
+                      variant='body2'
+                      align='justify'
+                      sx={{
+                        color: 'rgba(45, 52, 54, 1)',
+                        fontSize: '14px',
+                        mt: 2,
+                        whiteSpace: 'pre-line',
+                        fontWeight: 400
+                      }}
+                    >
+                      {expand ? item.description : `${item.description?.slice(0, maxChars)}`}
+                      {!expand && (
+                        <span
+                          onClick={() => {
+                            setExpand(true)
+                          }}
+                          style={{ cursor: 'pointer', color: 'whiteblue' }}
+                        >
+                          ...see more
+                        </span>
+                      )}
+                    </Typography>
+                  </Grid>
+                )}
               </Box>
             </Grid>
           </Grid>
