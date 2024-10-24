@@ -22,6 +22,7 @@ interface RowItem {
   phone: string
   role: string
   plan: string
+  point: number
   resend: {
     resend: VoidFunction
   }
@@ -45,6 +46,7 @@ export default function AccountDatagrid(props: RoleGridProps) {
     { field: 'role', headerName: 'Role', sortable: true, minWidth: 100 },
     { field: 'type', headerName: 'Type', sortable: true, minWidth: 100 },
     { field: 'plan', headerName: 'Plan', sortable: true, minWidth: 100 },
+    { field: 'point', headerName: 'Point', sortable: true, minWidth: 100 },
     {
       field: 'registered_at',
       headerName: 'Registered At',

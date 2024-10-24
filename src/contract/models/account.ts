@@ -1,6 +1,6 @@
 import ITeam from "./team"
 
- interface Account {
+interface Account {
     id: number
     team_id: number
     country_id: number
@@ -25,7 +25,8 @@ import ITeam from "./team"
     banner?: string
     role: string
     team: ITeam
-    documents: any
+    documents: any,
+    point: number,
 }
 
 export default Account;
