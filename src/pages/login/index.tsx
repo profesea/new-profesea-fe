@@ -27,7 +27,6 @@ import { useTranslation } from 'react-i18next'
 import { Icon } from '@iconify/react'
 import { useSearchParams } from 'next/navigation'
 
-import DialogGoogleLogin from './DialogGoogleLogin'
 import DialogMessage from './DialogMessage'
 import { AppConfig } from 'src/configs/api'
 import { useRouter } from 'next/router'
@@ -74,7 +73,6 @@ const LoginPage = () => {
   const checked = searchParams.get('checked')
 
   const [showPassword, setShowPassword] = useState<boolean>(false)
-  const [openModalGoogle, setOpenModalGoogle] = useState<boolean>(false)
   const [openDialogMessage, setOpenDialogMessage] = useState<boolean>(false)
   const [onLoading, setOnLoading] = useState<boolean>(false)
   const [checkEmail, setCheckEmail] = useState<boolean>(false)
@@ -153,10 +151,10 @@ const LoginPage = () => {
           item
           md={6}
           sx={{
-            backgroundImage: `url(/images/bg-login.jpeg)`,
+            backgroundImage: `url(/images/bg-login.jpg)`,
             backgroundRepeat: 'no-repeat',
-            backgroundSize: '150%',
-            backgroundPosition: '60% 0%'
+            backgroundSize: '100% auto',
+            backgroundPosition: '20% 45%'
           }}
         />
         <Grid item xs={12} md={6} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
@@ -326,6 +324,7 @@ const LoginPage = () => {
                         const emailValue = getValues('email')
                         onChecking(emailValue)
                       }}
+                      sx={{ textTransform: 'none' }}
                     >
                       {onLoading ? <CircularProgress color='primary' /> : t('input.continue')}
                     </Button>
@@ -344,8 +343,20 @@ const LoginPage = () => {
                         component={Link}
                         href='https://apifix.profesea.id/auth/google'
                         startIcon={<Icon icon='devicon:google' fontSize={20} />}
+                        sx={{ textTransform: 'none' }}
                       >
                         {t('input.g_login')}
+                      </Button>
+                      <Button
+                        fullWidth
+                        size='large'
+                        variant='outlined'
+                        component={Link}
+                        href='https://apifix.profesea.id/auth/facebook'
+                        startIcon={<Icon icon='devicon:facebook' fontSize={20} />}
+                        sx={{ textTransform: 'none' }}
+                      >
+                        {t('input.f_login')}
                       </Button>
                     </>
                   )}
@@ -406,12 +417,6 @@ const LoginPage = () => {
           </Box>
         </Grid>
       </Grid>
-      <DialogGoogleLogin
-        visible={openModalGoogle}
-        onCloseClick={() => {
-          setOpenModalGoogle(!openModalGoogle)
-        }}
-      />
       <DialogMessage
         email={getValues('email')}
         visible={openDialogMessage}

@@ -15,7 +15,7 @@ const defaultProvider: AuthValuesType = {
   loading: true,
   setUser: () => null,
   setLoading: () => Boolean,
-  glogin: () => Promise.resolve(),
+  socialLogin: () => Promise.resolve(),
   login: () => Promise.resolve(),
   loginSilent: () => Promise.resolve(),
   logout: () => Promise.resolve(),
@@ -125,24 +125,7 @@ const AuthProvider = ({ children }: Props) => {
       })
   }
 
-  const handleLoginSilent = async (params: LoginSilentParams, errorCallback?: ErrCallbackType) => {
-    HttpClient.post(authConfig.loginSilentEndpoint, params)
-      .then(async response => {
-        setLoading(false)
-        setUser({ ...response.data.user })
-        localStorage.setItem(authConfig.storageTokenKeyName, response.data.accessToken)
-        secureLocalStorage.setItem(localStorageKeys.userData, response.data.user)
-        secureLocalStorage.setItem(localStorageKeys.abilities, response.data.abilities)
-        initAuth()
-        router.replace('/home' as string)
-      })
-      .catch(err => {
-        setLoading(false)
-        if (errorCallback) errorCallback(err)
-      })
-  }
-
-  const handleGoogleLogin = async (params: { accessToken: string; namaevent: any }) => {
+  const handleSocialiteLogin = async (params: { accessToken: string; namaevent: any }) => {
     try {
       setLoading(true)
       try {
@@ -177,6 +160,23 @@ const AuthProvider = ({ children }: Props) => {
     }
   }
 
+  const handleLoginSilent = async (params: LoginSilentParams, errorCallback?: ErrCallbackType) => {
+    HttpClient.post(authConfig.loginSilentEndpoint, params)
+      .then(async response => {
+        setLoading(false)
+        setUser({ ...response.data.user })
+        localStorage.setItem(authConfig.storageTokenKeyName, response.data.accessToken)
+        secureLocalStorage.setItem(localStorageKeys.userData, response.data.user)
+        secureLocalStorage.setItem(localStorageKeys.abilities, response.data.abilities)
+        initAuth()
+        router.replace('/home' as string)
+      })
+      .catch(err => {
+        setLoading(false)
+        if (errorCallback) errorCallback(err)
+      })
+  }
+
   const handleLogout = async () => {
     setUser(null)
     secureLocalStorage.clear()
@@ -190,7 +190,7 @@ const AuthProvider = ({ children }: Props) => {
     loading,
     setUser,
     setLoading,
-    glogin: handleGoogleLogin,
+    socialLogin: handleSocialiteLogin,
     login: handleLogin,
     logout: handleLogout,
     loginSilent: handleLoginSilent,

@@ -13,7 +13,7 @@ const GoogleLogin = () => {
   useEffect(() => {
     if (token) {
       const accessToken = decodeURIComponent(token as string)
-      auth.glogin({ accessToken, namaevent: null })
+      auth.socialLogin({ accessToken, namaevent: null })
     }
   }, [token])
 

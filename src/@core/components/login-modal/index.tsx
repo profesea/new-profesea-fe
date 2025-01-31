@@ -28,7 +28,6 @@ import { useAuth } from 'src/hooks/useAuth'
 import { useSearchParams } from 'next/navigation'
 import { yupResolver } from '@hookform/resolvers/yup'
 import DialogSuccess from 'src/pages/loginevent/DialogSuccess'
-// import DialogGoogleLogin from './DialogGoogleLogin'
 import DialogMessage from './DialogMessage'
 import { useTheme } from '@mui/material'
 
@@ -217,12 +216,6 @@ const DialogLogin = (props: BlockDialog) => {
                 <Link href='/'>
                   <Box component='img' src='/images/logoprofesea.png' sx={{ width: 125 }}></Box>
                 </Link>
-                <Typography
-                  variant='h5'
-                  sx={{ textAlign: 'center', marginTop: '10px', fontWeight: 'bold', color: '#262525' }}
-                >
-                  {t('login_text_1')}
-                </Typography>
                 {(!isBanner || isXs) && (
                   <Typography variant='body2' sx={{ textAlign: 'center', color: '#262525', marginTop: '10px' }}>
                     {t('login_modal_subtitle_1')}
@@ -237,6 +230,7 @@ const DialogLogin = (props: BlockDialog) => {
                     rules={{ required: true }}
                     render={({ field: { value, onChange, onBlur } }) => (
                       <TextField
+                        size='medium'
                         autoFocus
                         label={t('input_label_1')}
                         value={value}
@@ -258,6 +252,7 @@ const DialogLogin = (props: BlockDialog) => {
                     rules={{ required: true }}
                     render={({ field: { value, onChange, onBlur } }) => (
                       <OutlinedInput
+                        size='medium'
                         value={value}
                         onBlur={onBlur}
                         label={t('input_label_2')}
@@ -294,32 +289,43 @@ const DialogLogin = (props: BlockDialog) => {
                   <Button
                     disabled={auth.loading}
                     fullWidth
-                    size='large'
+                    size='medium'
                     type='submit'
                     variant='contained'
-                    sx={{ mb: 4 }}
+                    sx={{ mb: '15px', textTransform: 'none' }}
                   >
                     {auth.loading ? <CircularProgress color='primary' /> : `${t('button_1')}`}
                   </Button>
                 </Box>
-                <Divider sx={{ textAlign: 'center', fontSize: '16px' }}>{t('login_text_5')}</Divider>
-                <Box sx={{ marginTop: '5%' }}>
-                  <Link href={`https://apifix.profesea.id/auth/google`} passHref legacyBehavior>
-                    <Button fullWidth size='large' variant='outlined' sx={{ mb: 3 }}>
-                      {t('login_text_1_G')} Google <Icon icon={'devicon:google'} style={{ marginLeft: 7 }} />
-                    </Button>
-                  </Link>
+                <Divider sx={{ textAlign: 'center', fontSize: '14px' }}>{t('login_text_5')}</Divider>
+                <Box flexDirection='column' sx={{ marginTop: '15px' }}>
+                  <Button
+                    fullWidth
+                    size='medium'
+                    variant='outlined'
+                    component={Link}
+                    href='https://apifix.profesea.id/auth/google'
+                    startIcon={<Icon icon='devicon:google' fontSize={20} />}
+                    sx={{ textTransform: 'none' }}
+                  >
+                    {t('input.g_login')}
+                  </Button>
+                  <Button
+                    fullWidth
+                    size='medium'
+                    variant='outlined'
+                    component={Link}
+                    href='https://apifix.profesea.id/auth/facebook'
+                    startIcon={<Icon icon='devicon:facebook' fontSize={20} />}
+                    sx={{ mt: '20px', textTransform: 'none' }}
+                  >
+                    {t('input.f_login')}
+                  </Button>
                 </Box>
-                <Divider
-                  sx={{
-                    '& .MuiDivider-wrapper': { px: 4 },
-                    mt: theme => `${theme.spacing(5)} !important`,
-                    mb: theme => `${theme.spacing(7.5)} !important`
-                  }}
-                ></Divider>
-                <Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center' }}>
+                <Box
+                  sx={{ mt: '20px', display: 'flex', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center' }}
+                >
                   <Typography sx={{ mr: 2, color: '#262525' }}>{t('login_text_2')}</Typography>
-
                   {namaevent ? (
                     <Typography
                       href={'/register/event/' + namaevent}
@@ -350,12 +356,6 @@ const DialogLogin = (props: BlockDialog) => {
           // window.location.replace('/home')
         }}
       />
-      {/* <DialogGoogleLogin
-        visible={openModalGoogle}
-        onCloseClick={() => {
-          setOpenModalGoogle(!openModalGoogle)
-        }}
-      /> */}
       <DialogMessage
         visible={openDialogMessage}
         onCloseClick={() => {

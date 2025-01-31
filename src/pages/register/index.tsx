@@ -199,10 +199,10 @@ const LoginPage = () => {
           item
           md={6}
           sx={{
-            backgroundImage: `url(/images/bg-login.jpeg)`,
+            backgroundImage: `url(/images/bg-login.jpg)`,
             backgroundRepeat: 'no-repeat',
-            backgroundSize: '150%',
-            backgroundPosition: '60% 0%'
+            backgroundSize: '100% auto',
+            backgroundPosition: '20% 45%'
           }}
         />
         <Grid item xs={12} md={6} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
@@ -427,6 +427,7 @@ const LoginPage = () => {
                         const emailValue = getValues('email')
                         onChecking(emailValue)
                       }}
+                      sx={{ textTransform: 'none' }}
                     >
                       {onLoading ? <CircularProgress color='primary' /> : t('input.continue')}
                     </Button>
@@ -445,8 +446,20 @@ const LoginPage = () => {
                         component={Link}
                         href='https://apifix.profesea.id/auth/google'
                         startIcon={<Icon icon='devicon:google' fontSize={20} />}
+                        sx={{ textTransform: 'none' }}
                       >
                         {t('input.g_login')}
+                      </Button>
+                      <Button
+                        fullWidth
+                        size='large'
+                        variant='outlined'
+                        component={Link}
+                        href='https://apifix.profesea.id/auth/facebook'
+                        startIcon={<Icon icon='devicon:facebook' fontSize={20} />}
+                        sx={{ textTransform: 'none' }}
+                      >
+                        {t('input.f_login')}
                       </Button>
                     </>
                   )}

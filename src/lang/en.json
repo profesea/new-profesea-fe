@@ -209,6 +209,7 @@
     "input": {
       "login": "Log in",
       "g_login": "Continue with Google",
+      "f_login": "Continue with Facebook",
       "register": "Register",
       "email": "Email Address",
       "password": "Password",
@@ -221,11 +222,11 @@
     },
     "tos": {
       "tos_me": "I agree to the",
-      "tos_start": "By signing up, you acknowledge that you have read and understood, and agree to Profesea's",
-      "tos_terms": "Terms",
+      "tos_start": "By signing up, you agree to the",
+      "tos_terms": "Terms & Conditions",
       "tos_and": "and",
-      "tos_privacy": "Privacy Policy.",
-      "tos_end": ""
+      "tos_privacy": "Privacy Policy",
+      "tos_end": "of Profesea."
     },
     "login_page": {
       "title_1": "Log in to Profesea!",

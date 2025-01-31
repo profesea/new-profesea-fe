@@ -210,6 +210,7 @@
     "input": {
       "login": "Masuk",
       "g_login": "Masuk dengan Google",
+      "f_login": "Masuk dengan Facebook",
       "register": "Registrasi",
       "email": "Alamat Email",
       "password": "Kata Sandi",
@@ -222,9 +223,9 @@
     },
     "tos": {
       "tos_me": "Saya menyetujui",
-      "tos_start": "Dengan mendaftar, Anda mengakui bahwa Anda telah membaca, memahami, dan menyetujui",
-      "tos_terms": "Ketentuan",
-      "tos_and": "dan",
+      "tos_start": "Dengan mendaftar, Anda menyetujui",
+      "tos_terms": "Syarat & Ketentuan",
+      "tos_and": "serta",
       "tos_privacy": "Kebijakan Privasi",
       "tos_end": "Profesea."
     },
