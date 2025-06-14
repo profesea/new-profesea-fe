@@ -34,13 +34,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import Head from 'next/head'
 import { useSearchParams } from 'next/navigation'
-import { linkToTitleCase, renderSalary } from 'src/utils/helpers'
+import { linkToTitleCase } from 'src/utils/helpers'
 import { useTheme } from '@mui/material/styles'
 import ShareArea from '../../../ShareArea'
-import { format } from 'date-fns'
-import ReactHtmlParser from 'react-html-parser'
-import Licensi from 'src/contract/models/licensi'
-import ButtonFollowCompany from 'src/layouts/components/ButtonFollowCompany'
+
+import CompanyDetailSection from 'src/views/job-detail/CompanyDetailSection'
+import JobDetailSection from 'src/views/job-detail/JobDetailSection'
 
 const TruncatedTypography = (props: { children: any; line?: number; [key: string]: any }) => {
   const { children, line, ...rest } = props
@@ -235,6 +234,7 @@ const JobDetail = () => {
       toast.error('Error save job')
     }
   }
+  
   const handleDeleteJobSave = async (jobId: any, jobSaveId: any) => {
     try {
       const response = await HttpClient.del(`/job/save/${jobSaveId}`)
@@ -247,13 +247,6 @@ const JobDetail = () => {
       console.log(error)
       toast.error('Error unsaved job')
     }
-  }
-
-  const filterCertificates = (license: Licensi[]) => {
-    const coc = license.filter(l => l.parent === 'COC')
-    const cop = license.filter(l => l.parent === 'COP')
-
-    return [coc, cop]
   }
 
   const handleUpdateStatusOffering = async (status: string) => {
@@ -425,6 +418,7 @@ const JobDetail = () => {
             <FontAwesomeIcon icon={faArrowLeft} color='text.primary' />
           </IconButton>
         </Grid>
+
         <Grid
           container
           gap={isMobile ? '16px' : '32px'}
@@ -509,285 +503,15 @@ const JobDetail = () => {
                   </Typography>
                 </Box>
               </Box>
-              {/* Detail With Icons */}
-              <Box
-                sx={{
-                  display: 'flex',
-                  flexDirection: isMobile ? 'column' : 'row',
-                  gap: isMobile ? '10px' : '32px',
-                  py: '24px',
-                  borderTop: '1px solid #EDEDED',
-                  borderBottom: '1px solid #EDEDED'
-                }}
-              >
-                <Grid container spacing={4}>
-                  {jobDetail?.category?.employee_type == 'onship' ? (
-                    <>
-                      <Grid item xs={6} sx={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-                        <Icon icon='ph:anchor' color='#32487A' fontSize={'16px'} />
-                        <Typography sx={{ fontSize: '14px', fontWeight: 600, color: '#404040' }}>
-                          Job Category
-                        </Typography>
-                      </Grid>
-                      <Grid item xs={6}>
-                        : {jobDetail?.category?.name || '-'}
-                      </Grid>
-                      <Grid item xs={6} sx={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-                        <Icon icon='material-symbols-light:globe' color='#32487A' fontSize={'16px'} />
-                        <Typography sx={{ fontSize: '14px', fontWeight: 600, color: '#404040' }}>
-                          Sail Region
-                        </Typography>
-                      </Grid>
-                      <Grid item xs={6}>
-                        : {jobDetail?.sailing_region === 'iv' ? 'International Voyage' : 'Near Coastal Voyage (NCV)'}
-                      </Grid>
-                      <Grid item xs={6} sx={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-                        <Icon icon='ph:briefcase-fill' color='#32487A' fontSize={'16px'} />
-                        <Typography sx={{ fontSize: '14px', fontWeight: 600, color: '#404040' }}>Experience</Typography>
-                      </Grid>
-                      <Grid item xs={6}>
-                        : {jobDetail?.experience || '-'} contract
-                      </Grid>
-                      <Grid item xs={6} sx={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-                        <Icon icon='ph:chats-duotone' color='#32487A' fontSize={'16px'} />
-                        <Typography sx={{ fontSize: '14px', fontWeight: 600, color: '#404040' }}>
-                          Interview Location
-                        </Typography>
-                      </Grid>
-                      <Grid item xs={6}>
-                        : {jobDetail?.city?.city_name || '-'}
-                      </Grid>
-                    </>
-                  ) : (
-                    <>
-                      <Grid item xs={6} sx={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-                        <Icon icon='ph:briefcase-fill' color='#32487A' fontSize={'16px'} />
-                        <Typography sx={{ fontSize: '14px', fontWeight: 600, color: '#404040' }}>
-                          Job Category
-                        </Typography>
-                      </Grid>
-                      <Grid item xs={6}>
-                        : {jobDetail?.job_title || '-'}
-                      </Grid>
-                      <Grid item xs={6} sx={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-                        <Icon icon='ph:steps-duotone' color='#32487A' fontSize={'16px'} />
-                        <Typography sx={{ fontSize: '14px', fontWeight: 600, color: '#404040' }}>Role Level</Typography>
-                      </Grid>
-                      <Grid item xs={6}>
-                        : {jobDetail?.rolelevel?.levelName || '-'}
-                      </Grid>
-                      <Grid item xs={6} sx={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-                        <Icon icon='ph:laptop-thin' color='#32487A' fontSize={'16px'} />
-                        <Typography sx={{ fontSize: '14px', fontWeight: 600, color: '#404040' }}>
-                          Work Arrangement
-                        </Typography>
-                      </Grid>
-                      <Grid item xs={6}>
-                        : {jobDetail?.work_arrangement || '-'}
-                      </Grid>
-                      <Grid item xs={6} sx={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-                        <Icon icon='ph:clock-duotone' color='#32487A' fontSize={'16px'} />
-                        <Typography sx={{ fontSize: '14px', fontWeight: 600, color: '#404040' }}>
-                          Employment Type
-                        </Typography>
-                      </Grid>
-                      <Grid item xs={6}>
-                        : {jobDetail?.employment_type || '-'}
-                      </Grid>
-                    </>
-                  )}
-                </Grid>
-                <Grid container spacing={4}>
-                  {jobDetail?.category?.employee_type == 'onship' ? (
-                    <>
-                      <Grid item xs={6} sx={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-                        <Icon icon='ph:files-light' color='#32487A' fontSize={'16px'} />
-                        <Typography sx={{ fontSize: '14px', fontWeight: 600, color: '#404040' }}>
-                          Contract Duration
-                        </Typography>
-                      </Grid>
-                      <Grid item xs={6}>
-                        : {jobDetail?.contract_duration || '-'} months
-                      </Grid>
-                      <Grid item xs={6} sx={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-                        <Icon icon='ph:calendar-dots-duotone' color='#32487A' fontSize={'16px'} />
-                        <Typography sx={{ fontSize: '14px', fontWeight: 600, color: '#404040' }}>
-                          Date of Board
-                        </Typography>
-                      </Grid>
-                      <Grid item xs={6}>
-                        : {format(new Date(jobDetail?.onboard_at), 'dd/MM/yy') ?? '-'}
-                      </Grid>
-                      <Grid item xs={6} sx={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-                        <Icon icon='ph:sailboat' color='#32487A' fontSize={'16px'} />
-                        <Typography sx={{ fontSize: '14px', fontWeight: 600, color: '#404040' }}>
-                          Vessel Type
-                        </Typography>
-                      </Grid>
-                      <Grid item xs={6}>
-                        : {jobDetail?.vessel_type?.name || '-'}
-                      </Grid>
-                      <Grid item xs={6} sx={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-                        <Icon icon='ant-design:dollar-outlined' color='#32487A' fontSize={'16px'} />
-                        <Typography sx={{ fontSize: '14px', fontWeight: 600, color: '#404040' }}>Salary</Typography>
-                      </Grid>
-                      <Grid item xs={6}>
-                        : {renderSalary(jobDetail?.salary_start, jobDetail?.salary_end, jobDetail?.currency as string)}
-                      </Grid>
-                    </>
-                  ) : (
-                    <>
-                      <Grid item xs={6} sx={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-                        <Icon icon='ant-design:dollar-outlined' color='#32487A' fontSize={'16px'} />
-                        <Typography sx={{ fontSize: '14px', fontWeight: 600, color: '#404040' }}>Salary</Typography>
-                      </Grid>
-                      <Grid item xs={6}>
-                        : {renderSalary(jobDetail?.salary_start, jobDetail?.salary_end, jobDetail?.currency as string)}
-                      </Grid>
-                      <Grid item xs={6} sx={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-                        <Icon icon='ph:briefcase-fill' color='#32487A' fontSize={'16px'} />
-                        <Typography sx={{ fontSize: '14px', fontWeight: 600, color: '#404040' }}>
-                          Work Experience
-                        </Typography>
-                      </Grid>
-                      <Grid item xs={6}>
-                        : {jobDetail?.experience || '-'} years
-                      </Grid>
-                      <Grid item xs={6} sx={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-                        <Icon icon='cil:education' color='#32487A' fontSize={'16px'} />
-                        <Typography sx={{ fontSize: '14px', fontWeight: 600, color: '#404040' }}>Education</Typography>
-                      </Grid>
-                      <Grid item xs={6}>
-                        : {jobDetail?.degree?.name || '-'}
-                      </Grid>
-                      <Grid item xs={6}></Grid>
-                      <Grid item xs={6}></Grid>
-                      <Grid item xs={6}></Grid>
-                      <Grid item xs={6}></Grid>
-                    </>
-                  )}
-                </Grid>
-              </Box>
-              {/* Description */}
-              <Box>
-                <Typography
-                  sx={{
-                    fontSize: '16px',
-                    fontWeight: 700,
-                    color: '#32497A'
-                  }}
-                >
-                  Description
-                </Typography>
-                <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: ['center', 'flex-start'] }}>
-                  <Typography sx={{ fontSize: '14px', fontWeight: 400, color: '#404040' }}>
-                    {ReactHtmlParser(`${jobDetail?.description}`)}
-                  </Typography>
-                </Box>
-              </Box>
 
-              {/* Certificate */}
-              {jobDetail?.category?.employee_type == 'onship' && (
-                <>
-                  <Box>
-                    <Typography
-                      sx={{
-                        fontSize: '16px',
-                        fontWeight: 700,
-                        color: '#32497A',
-                        marginBottom: '16px'
-                      }}
-                    >
-                      Mandatory Certificate
-                    </Typography>
-                    <Box sx={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                      <Box>
-                        <Typography sx={{ fontSize: '14px', fontWeight: 700, color: '#303030' }}>
-                          Certificate of Competency
-                        </Typography>
-                        <ol style={{ paddingInlineStart: '20px' }}>
-                          {filterCertificates(jobDetail?.license)[0].map((l, index) => (
-                            <li key={index} style={{ fontSize: '14px', fontWeight: 400 }}>
-                              {l.title}
-                            </li>
-                          ))}
-                        </ol>
-                      </Box>
-                      <Box>
-                        <Typography sx={{ fontSize: '14px', fontWeight: 700, color: '#303030' }}>
-                          Certificate of Proficiency
-                        </Typography>
-                        <ol style={{ paddingInlineStart: '20px' }}>
-                          {filterCertificates(jobDetail?.license)[1].map((l, index) => (
-                            <li key={index} style={{ fontSize: '14px', fontWeight: 400 }}>
-                              {l.title}
-                            </li>
-                          ))}
-                        </ol>
-                      </Box>
-                    </Box>
-                  </Box>
-                </>
-              )}
+              <JobDetailSection jobDetail={jobDetail} isMobile={isMobile} />
+              
               {jobDetail?.category?.employee_type == 'onship' && (
                 <SectionThreeJobDetail jobDetail={jobDetail} license={license} />
               )}
-            </Card>
 
-            <Card sx={{ border: 0, boxShadow: 0, backgroundColor: '#FFFFFF', padding: isMobile ? '24px' : '32px' }}>
-              <Box sx={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-                <Box>
-                  <Typography
-                    sx={{
-                      fontSize: '16px',
-                      fontWeight: 700,
-                      color: '#303030'
-                    }}
-                  >
-                    About the company
-                  </Typography>
-                </Box>
-                <Box
-                  sx={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
-                    alignItems: 'center'
-                  }}
-                >
-                  <Box sx={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-                    <Avatar src={jobDetail?.company?.photo} sx={{ width: 51, height: 51 }} />
-                    <Box
-                      sx={{ cursor: 'pointer' }}
-                      onClick={() => router.push(`/company/${jobDetail?.company?.username}`)}
-                    >
-                      <TruncatedTypography fontSize={14} fontWeight={700} color={'#303030'}>
-                        {jobDetail?.company?.name ?? '-'}
-                      </TruncatedTypography>
-                      {/* industry company belum ada di api */}
-                      {/* todo add industry company */}
-                      <TruncatedTypography fontSize={14} fontWeight={400} color={'#868686'}>
-                        {jobDetail?.company?.industry?.name ?? '-'}
-                      </TruncatedTypography>
-                    </Box>
-                  </Box>
-                  <ButtonFollowCompany user_id={jobDetail?.company?.id as number} friend_id={Number(user?.id)} />
-                </Box>
-                <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: ['left', 'flex-start'] }}>
-                  <Typography
-                    sx={{
-                      color: '#5E5E5E',
-                      fontSize: 14,
-                      fontWeight: 400,
-                      whiteSpace: 'pre-line'
-                    }}
-                    textAlign={'justify'}
-                  >
-                    {jobDetail?.company?.about}
-                  </Typography>
-                </Box>
-              </Box>
             </Card>
+            <CompanyDetailSection isMobile={isMobile} user={user} jobDetail={jobDetail} />
           </Grid>
 
           {jobDetailSugestion.length !== 0 && (

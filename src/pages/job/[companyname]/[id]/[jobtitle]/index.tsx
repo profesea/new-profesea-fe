@@ -1,16 +1,12 @@
 import React, { ReactNode, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import Box from '@mui/material/Box'
-import { Avatar, Card, CardContent, Typography, CircularProgress, IconButton } from '@mui/material'
+import { Card, CircularProgress, IconButton, useTheme, useMediaQuery, Avatar, Typography, Button } from '@mui/material'
 import { HttpClient } from 'src/services'
 import Job from 'src/contract/models/job'
 import Grid from '@mui/material/Grid'
 
 import RelatedJobView from 'src/views/find-job/RelatedJobView'
-import HeaderJobDetail from 'src/views/job-detail/HeaderJobDetail'
-import SectionOneJobDetail from 'src/views/job-detail/SectionOneJobDetail'
-import SectionTwoJobDetail from 'src/views/job-detail/SectionTwoJobDetail'
-import SectionThreeJobDetail from 'src/views/job-detail/SectionThreeJobDetal'
 import { usePathname } from 'next/navigation'
 import { useAuth } from 'src/hooks/useAuth'
 import DialogLogin from 'src/@core/components/login-modal'
@@ -21,10 +17,18 @@ import { useTranslation } from 'react-i18next'
 import { useSearchParams } from 'next/navigation'
 import { linkToTitleCase } from 'src/utils/helpers'
 import LandingPageLayout from 'src/@core/layouts/LandingPageLayout'
+import CompanyDetailSection from 'src/views/job-detail/CompanyDetailSection'
+import ShareArea from 'src/pages/candidate/job/ShareArea'
+import JobDetailSection from 'src/views/job-detail/JobDetailSection'
+import { Icon } from '@iconify/react'
 
 const JobDetail = () => {
+  const Theme = useTheme()
+  const isMobile = useMediaQuery(Theme.breakpoints.down('md'))
+
   const router = useRouter()
   const params = useSearchParams()
+  const shareUrl = window.location.href
 
   const pathname = usePathname()
   const { user } = useAuth()
@@ -150,88 +154,104 @@ const JobDetail = () => {
         <meta name='viewport' content='initial-scale=0.8, width=device-width' />
         <script type='application/ld+json' dangerouslySetInnerHTML={addProductJsonLd()} key='product-jsonld' />
       </Head>
-      <Box p={4}>
-        <Grid container sx={{ position: 'fixed' }}>
+
+      <Box sx={{ position: 'relative' }}>
+
+        <Grid container sx={{ position: 'absolute', top: '12px', left: '-72px' }}>
           <IconButton onClick={() => router.push('/find-job')}>
             <FontAwesomeIcon icon={faArrowLeft} color='text.primary' />
           </IconButton>
         </Grid>
+
         <Grid
           container
-          spacing={2}
-          sx={{
-            display: 'flex',
-            justifyContent: 'center'
-          }}
+          gap={isMobile ? '16px' : '32px'}
+          sx={{ flexWrap: 'nowrap', flexDirection: isMobile ? 'column' : 'row' }}
         >
-          <Grid item xs={12} md={jobDetailSugestion.length !== 0 ? 7 : 10}>
-            <Card sx={{ border: 0, boxShadow: 0, color: 'common.white', backgroundColor: '#FFFFFF' }}>
-              <Grid container>
-                <Grid item xs={12} sx={{ py: '20px' }}>
-                  <CardContent>
-                    <HeaderJobDetail jobDetail={jobDetail} onApplied={false} handleApply={handleApply} />
-                    <SectionOneJobDetail jobDetail={jobDetail} />
-                    <SectionTwoJobDetail jobDetail={jobDetail} />
-                    {jobDetail?.category?.employee_type == 'onship' && <SectionThreeJobDetail jobDetail={jobDetail} />}
-                  </CardContent>
-                  <Grid item xs={12} sx={{ display: 'flex', alignItems: 'left', flexDirection: 'column', px: '20px' }}>
-                    <Card sx={{ border: 0, boxShadow: 0, color: 'common.white', backgroundColor: '#32487A' }}>
-                      <CardContent sx={{ p: 2 }}>
-                        <Box
-                          height={65}
-                          sx={{
-                            display: 'flex',
-                            alignContent: 'center',
-                            '& svg': { color: 'text.secondary' }
-                          }}
-                        >
-                          <Box sx={{ display: 'flex', justifyContent: 'center' }} mt={2} ml={2} mr={3}>
-                            <Avatar
-                              src={jobDetail?.company?.photo}
-                              alt='profile-picture'
-                              sx={{ width: 50, height: 50 }}
-                            />
-                          </Box>
-                          <Box
-                            sx={{ display: 'flex', flexDirection: 'column', alignItems: ['center', 'flex-start'] }}
-                            marginTop={2}
-                          >
-                            <Typography sx={{ color: 'common.white', mb: 1 }} fontSize={20}>
-                              <strong>{jobDetail?.company?.name ?? '-'}</strong>
-                            </Typography>
-                          </Box>
-                        </Box>
-                        <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'left' }} ml={2} mt={2}>
-                          <Typography
-                            sx={{ color: 'common.white', fontSize: '16px', fontWeight: '600' }}
-                            variant='body2'
-                          >
-                            About Recruiter
-                          </Typography>
-                          <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: ['left', 'flex-start'] }}>
-                            <Typography
-                              sx={{
-                                mt: 1,
-                                color: 'common.white',
-                                fontSize: 14,
-                                fontWeight: 400,
-                                whiteSpace: 'pre-line'
-                              }}
-                              textAlign={'justify'}
-                            >
-                              {jobDetail?.company?.about}
-                            </Typography>
-                          </Box>
-                        </Box>
-                      </CardContent>
-                    </Card>
-                  </Grid>
-                </Grid>
-              </Grid>
+          <Grid
+            item
+            xs={12}
+            md={8}
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: isMobile ? '16px' : '24px',
+              padding: '0px !important'
+            }}
+          >
+            <Card
+              sx={{
+                border: 0,
+                boxShadow: 0,
+                backgroundColor: '#FFFFFF',
+                padding: isMobile ? '24px' : '32px',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '24px'
+              }}
+            >
+              {/* Header */}
+              <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    marginBottom: '8px',
+                    alignItems: 'center'
+                  }}
+                >
+                  <Box sx={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                    <Avatar src={jobDetail?.company?.photo} sx={{ width: 24, height: 24 }} />
+                    <TruncatedTypography fontSize={14} fontWeight={400} color={'#404040'}>
+                      {jobDetail?.company?.name ?? '-'}
+                    </TruncatedTypography>
+                  </Box>
+                  <Box sx={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+                    <Button
+                      onClick={handleApply}
+                      variant='contained'
+                      color='primary'
+                      size='small'
+                      startIcon={<Icon icon='iconoir:submit-document' fontSize={10} />}
+                      sx={{ width: '100%' }}
+                    >
+                      Apply Job
+                    </Button>
+                    <ShareArea
+                      subject={`Job For ${
+                        jobDetail?.employee_type === 'onship'
+                          ? jobDetail?.role_type?.name
+                          : jobDetail?.job_title ?? jobDetail?.role_type?.name ?? '-'
+                      }.`}
+                      url={shareUrl}
+                      clean={true}
+                    />
+                  </Box>
+                </Box>
+                <Box sx={{ display: 'flex', flexDirection: 'column', gap: '8px', justifyContent: 'flex-start' }}>
+                  {jobDetail?.category?.employee_type == 'onship' ? (
+                    <Typography sx={{ fontWeight: 'bold', color: '#32497A' }} fontSize={isMobile ? 20 : 24}>
+                      <strong>{jobDetail?.role_type?.name}</strong>
+                    </Typography>
+                  ) : (
+                    <Typography sx={{ fontWeight: 'bold', color: '#32497A' }} fontSize={isMobile ? 20 : 24}>
+                      <strong>{jobDetail?.job_title ?? jobDetail?.role_type?.name ?? '-'}</strong>
+                    </Typography>
+                  )}
+                  <Typography sx={{ color: 'text.primary' }} fontSize={12}>
+                    {jobDetail?.city?.city_name}, {jobDetail?.country?.name}
+                  </Typography>
+                </Box>
+              </Box>
+
+              <JobDetailSection jobDetail={jobDetail} isMobile={isMobile} />
             </Card>
+            <CompanyDetailSection isMobile={isMobile} user={user} jobDetail={jobDetail} />
           </Grid>
           {jobDetailSugestion.length !== 0 && (
-            <Grid item xs={12} md={3}>
+            <Grid item xs={12} md={4} sx={{
+              padding: '0px !important'
+            }}>
               <Box
                 sx={{
                   display: 'flex',
@@ -252,19 +272,44 @@ const JobDetail = () => {
               />
             </Grid>
           )}
-
-          {openDialog && (
-            <DialogLogin
-              visible={openDialog}
-              variant='candidate'
-              onCloseClick={() => {
-                setOpenDialog(!openDialog)
-              }}
-            />
-          )}
         </Grid>
       </Box>
+
+      {openDialog && (
+        <DialogLogin
+          visible={openDialog}
+          variant='candidate'
+          onCloseClick={() => {
+            setOpenDialog(!openDialog)
+          }}
+        />
+      )}
     </>
+  )
+}
+
+const TruncatedTypography = (props: { children: any; line?: number; [key: string]: any }) => {
+  const { children, line, ...rest } = props
+  const maxLine = line ? line : 1
+
+  return (
+    <Typography
+      sx={{
+        display: '-webkit-box',
+        WebkitBoxOrient: 'vertical',
+        WebkitLineClamp: maxLine,
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+        whiteSpace: 'normal',
+        maxHeight: `calc(${maxLine} * 1.2em)`,
+        minHeight: '1.2em',
+        lineHeight: '1.2em',
+        fontSize: '16px',
+        ...rest
+      }}
+    >
+      {children}
+    </Typography>
   )
 }
 

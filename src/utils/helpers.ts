@@ -471,7 +471,7 @@ const renderSalary = (salaryStart: any, salaryEnd: any, currency: string) => {
                 : currency
             }`
     } else {
-        return '-'
+        return 'Undisclosed'
     }
 }
 

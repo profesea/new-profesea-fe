@@ -51,7 +51,7 @@ const LandingPageLayout = (props: LandingPageLayoutProps) => {
             overflowX: 'hidden',
             position: 'relative',
             minHeight: theme => `calc(100vh - ${theme.spacing((theme.mixins.toolbar.minHeight as number) / 4)})`,
-            padding: pathname.startsWith('/profile/') || pathname.startsWith('/company/') ? '24px 120px' : ''
+            padding: pathname.startsWith('/profile/') || pathname.startsWith('/company/') || pathname.startsWith('/job/') ? '24px 120px' : ''
           }}
         >
           {children}
