@@ -56,6 +56,7 @@ interface Job {
   job_title?: string
   hide_salary?: boolean
   currency?: string
+  payment_periode?: string
   rotational?: boolean
   is_active: boolean
   deleted_at: string

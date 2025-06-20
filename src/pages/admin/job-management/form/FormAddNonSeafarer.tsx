@@ -70,6 +70,7 @@ const FormAddNonSeafarer: React.FC<IFormAddNonSeafarerProps> = ({ alignment, dia
   const [rotational, setRotational] = useState('')
   const [desc, setDesc] = useState(EditorState.createEmpty())
   const [currency, setCurrency] = useState('')
+  const [paymentPeriode, setPaymentPeriode] = useState('Monthly')
   const [checked, setChecked] = React.useState(false)
   const [UserId, setUserId] = useState(0)
 
@@ -183,6 +184,7 @@ const FormAddNonSeafarer: React.FC<IFormAddNonSeafarerProps> = ({ alignment, dia
       salary_start: salary_start,
       salary_end: salary_end,
       currency: currency, // value => "idr" or "dolar" (baru)
+      payment_periode: paymentPeriode,
       experience: experience,
       experience_type: 'year',
       sailing_region: Sail,
@@ -485,8 +487,8 @@ const FormAddNonSeafarer: React.FC<IFormAddNonSeafarerProps> = ({ alignment, dia
           </Grid>
         </Grid>
         <Grid container columnSpacing={'1'} rowSpacing={'2'} sx={{ mt: 1 }}>
-          <Grid item md={6} xs={12} sx={{ mb: 1, display: 'flex', gap: 2 }}>
-            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, width: '150px' }}>
+          <Grid item md={3} xs={12} sx={{ mb: 1 }}>
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
               <Autocomplete
                 disablePortal
                 id='currency'
@@ -510,17 +512,35 @@ const FormAddNonSeafarer: React.FC<IFormAddNonSeafarerProps> = ({ alignment, dia
                 sx={{ width: '150px' }}
               />
             </Box>
-            <TextField
-              defaultValue={0}
-              id='salary_start'
-              type='number'
-              label='Salary Range From'
-              variant='outlined'
-              fullWidth
-              {...register('salary_start')}
+            
+          </Grid>
+          <Grid item md={3} xs={12} sx={{ mb: 1 }}>
+            <Autocomplete
+              disablePortal
+              id='paymentPeriode'
+              options={[
+                { value: 'Monthly', label: 'Monthly' },
+                { value: 'Daily', label: 'Daily' }
+              ]}
+              getOptionLabel={(option: any) => option.label}
+              renderInput={params => <TextField {...params} label='Payment Periode' />}
+              onChange={(event: any, newValue: any | null) => setPaymentPeriode(newValue ? newValue.value : '')}
             />
           </Grid>
-          <Grid item md={6} xs={12} sx={{ mb: 1 }}>
+          <Grid item md={3} xs={12} sx={{ mb: 1, display: 'flex', gap:1 }}>
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2,  }}>
+              <TextField
+                  defaultValue={0}
+                  id='salary_start'
+                  type='number'
+                  label='Salary Range From'
+                  variant='outlined'
+                  fullWidth
+                  {...register('salary_start')}
+                />
+              </Box>
+          </Grid>
+          <Grid item md={3} xs={12} sx={{ mb: 1, display: 'flex', gap:1 }}>
             <TextField
               defaultValue={0}
               id='salary_end'

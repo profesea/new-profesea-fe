@@ -12,6 +12,7 @@ interface FormDataSeafarer {
     licenseCOC?: any[]
     licenseCOP?: any[]
     currency?: string
+    payment_periode?:string
     minimum?: number
     maximum?: number
 }
@@ -27,6 +28,7 @@ interface FormDataProfessional {
     experience?: number
     jobExpired?: string
     currency?: string
+    payment_periode?: string
     minimum?: number
     maximum?: number
 }

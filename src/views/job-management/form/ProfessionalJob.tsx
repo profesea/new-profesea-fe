@@ -62,6 +62,11 @@ const currency = [
   { id: 'USD', label: 'USD' }
 ]
 
+const paymentPeriodeItem = [
+  { id: 'Monthly', label: 'Monthly' },
+  { id: 'Daily', label: 'Daily' }
+] 
+
 const schema = yup.object().shape({
   jobCategory: yup.number().required('Job Category is required')
 })
@@ -142,6 +147,7 @@ const SeafarerJob = ({ job, type }: { job?: Job; type: 'create' | 'edit' }) => {
       setValue('experience', job.experience)
       setValue('jobExpired', job.onboard_at)
       setValue('currency', job.currency)
+      setValue('payment_periode',job.payment_periode)
       setValue('minimum', Number(job.salary_start))
       setValue('maximum', Number(job.salary_end))
       if (job.description) {
@@ -259,6 +265,7 @@ const SeafarerJob = ({ job, type }: { job?: Job; type: 'create' | 'edit' }) => {
       education,
       jobExpired,
       currency,
+      payment_periode,
       minimum,
       maximum
     } = data
@@ -291,6 +298,7 @@ const SeafarerJob = ({ job, type }: { job?: Job; type: 'create' | 'edit' }) => {
       onboard_at: onboardDate,
       description: description.hasText() ? draftToHtml(convertToRaw(description)) : '<p></p>',
       currency: currency,
+      payment_periode: payment_periode,
       salary_start: minimum,
       salary_end: maximum,
       hide_salary: hidePrice,
@@ -692,6 +700,43 @@ const SeafarerJob = ({ job, type }: { job?: Job; type: 'create' | 'edit' }) => {
                         placeholder='Currency'
                         error={!!errors.currency}
                         helperText={errors.currency?.message}
+                      />
+                    )}
+                    renderOption={(props, option) => (
+                      <MenuItem {...props} key={option.id} value={option.id}>
+                        {option.label}
+                      </MenuItem>
+                    )}
+                    noOptionsText='Hasil pencaian tidak ditemukan. Coba gunakan kata kunci lain atau periksa kembali pencarian Anda'
+                  />
+                )}
+              />
+            </FormControl>
+            <FormControl fullWidth error={!!errors.payment_periode}>
+              <Typography sx={{ mb: '8px', color: '#525252', fontSize: 12, fontWeight: 700 }}>
+                Payment Periode <span style={{ color: '#F22' }}>*</span>
+              </Typography>
+              <Controller
+                name='payment_periode'
+                control={control}
+                render={({ field }) => (
+                  <Autocomplete
+                    {...field}
+                    autoHighlight
+                    options={paymentPeriodeItem || []}
+                    getOptionLabel={option => option.label || ''}
+                    value={paymentPeriodeItem?.find(data => data.id === field.value) || null}
+                    onChange={(_, newValue) => {
+                      field.onChange(newValue?.id || '')
+                    }}
+                    isOptionEqualToValue={(option, value) => option.id === value.id}
+                    renderInput={field => (
+                      <TextField
+                        {...field}
+                        size='small'
+                        placeholder='Payment Periode'
+                        error={!!errors.payment_periode}
+                        helperText={errors.payment_periode?.message}
                       />
                     )}
                     renderOption={(props, option) => (

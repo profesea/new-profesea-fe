@@ -69,6 +69,7 @@ const FormAddSeafarer: React.FC<IFormAddSeafarerProps> = ({ dialogProps, alignme
   const [rotational, setRotational] = useState('')
   const [desc, setDesc] = useState(EditorState.createEmpty())
   const [currency, setCurrency] = useState('')
+  const [paymentPeriode, setPaymentPeriode] = useState('Monthly')
   const [checked, setChecked] = React.useState(false)
   const [UserId, setUserId] = useState(0)
 
@@ -176,6 +177,7 @@ const FormAddSeafarer: React.FC<IFormAddSeafarerProps> = ({ dialogProps, alignme
       salary_start: salary_start,
       salary_end: salary_end,
       currency: currency, // value => "idr" or "dolar" (baru)
+      paymentPeriode: paymentPeriode,
       experience: experience,
       experience_type: 'contract',
       sailing_region: Sail,
@@ -463,8 +465,8 @@ const FormAddSeafarer: React.FC<IFormAddSeafarerProps> = ({ dialogProps, alignme
           </Grid>
         </Grid>
         <Grid container columnSpacing={2} sx={{ mt: 2 }}>
-          <Grid item md={6} xs={12} sx={{ mb: 1, display: 'flex', gap: 2 }}>
-            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, width: '150px' }}>
+          <Grid item md={3} xs={12} sx={{ mb: 1, gap: 1 }}>
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
               <Autocomplete
                 disablePortal
                 id='currency'
@@ -488,6 +490,21 @@ const FormAddSeafarer: React.FC<IFormAddSeafarerProps> = ({ dialogProps, alignme
                 sx={{ width: '150px' }}
               />
             </Box>
+          </Grid>
+          <Grid item md={3} xs={12} sx={{ mb: 1, gap: 1 }}>
+            <Autocomplete
+              disablePortal
+              id='paymentPeriode'
+              options={[
+                { value: 'Monthly', label: 'Monthly' },
+                { value: 'Daily', label: 'Daily' }
+              ]}
+              getOptionLabel={(option: any) => option.label}
+              renderInput={params => <TextField {...params} label='Payment Periode' />}
+              onChange={(event: any, newValue: any | null) => setPaymentPeriode(newValue ? newValue.value : '')}
+            />
+          </Grid>
+          <Grid item md={2} xs={12} sx={{ mb: 1, gap: 1 }}>
             <TextField
               defaultValue={0}
               id='salary_start'
@@ -498,7 +515,8 @@ const FormAddSeafarer: React.FC<IFormAddSeafarerProps> = ({ dialogProps, alignme
               {...register('salary_start')}
             />
           </Grid>
-          <Grid item md={3} xs={12} sx={{ mb: 1 }}>
+          
+          <Grid item md={2} xs={12} sx={{ mb: 1, gap:1 }}>
             <TextField
               defaultValue={0}
               id='salary_end'
@@ -509,7 +527,7 @@ const FormAddSeafarer: React.FC<IFormAddSeafarerProps> = ({ dialogProps, alignme
               {...register('salary_end')}
             />
           </Grid>
-          <Grid item md={3} xs={12} sx={{ mb: 1 }}>
+          <Grid item md={2} xs={12} sx={{ mb: 1, gap:1 }}>
             <Autocomplete
               disablePortal
               id='rotational'

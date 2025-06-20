@@ -95,6 +95,10 @@ const DialogEdit = (props: EditProps) => {
     label: props.selectedItem.currency,
     value: props.selectedItem.currency
   })
+  const [paymentPeriode, setPaymentPeriode] = useState<any>({
+    label: props.selectedItem.payment_periode,
+    value: props.selectedItem.payment_periode
+  })
   const [checked, setChecked] = useState(props.selectedItem.hide_salary)
   const [rotational, setRotational] = useState(
     props?.selectedItem?.rotational ? { value: 'yes', label: 'Yes' } : { value: 'no', label: 'No' }
@@ -226,6 +230,7 @@ const DialogEdit = (props: EditProps) => {
       salary_start: salary_start,
       salary_end: salary_end,
       currency: currency?.value,
+      payment_periode: paymentPeriode?.value,
       experience: experience,
       experience_type: categoryEmployeeType == 'onship' ? 'contract' : 'year',
       employment_type: Employmenttype?.name,
@@ -657,7 +662,7 @@ const DialogEdit = (props: EditProps) => {
             )}
 
             <Grid item container xs={12} sx={{ mt: 2, display: 'flex', gap: 1 }}>
-              <Grid item md={3} xs={12}>
+              <Grid item md={3} xs={12} sx={{ mb: 1, display: 'flex', gap: 1 }}>
                 <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
                   <Autocomplete
                     disablePortal
@@ -684,7 +689,20 @@ const DialogEdit = (props: EditProps) => {
                   />
                 </Box>
               </Grid>
-              <Grid item md={3} xs={12}>
+              <Grid item md={3} xs={12} sx={{ mb: 1, display: 'flex', gap: 1 }}>
+                <Autocomplete
+                  disablePortal
+                  id='paymentPeriode'
+                  options={[
+                    { value: 'Monthly', label: 'Monthly' },
+                    { value: 'Daily', label: 'Daily' }
+                  ]}
+                  getOptionLabel={(option: any) => option.label}
+                  renderInput={params => <TextField {...params} label='Payment Periode' />}
+                  onChange={(event: any, newValue: any | null) => setPaymentPeriode(newValue ? newValue.value : '')}
+                />
+              </Grid>
+              <Grid item md={3} xs={12} sx={{ mb: 1, display: 'flex', gap: 1 }}>
                 <TextField
                   defaultValue={props.selectedItem.salary_start}
                   id='salary_start'
@@ -694,7 +712,7 @@ const DialogEdit = (props: EditProps) => {
                   {...register('salary_start')}
                 />
               </Grid>
-              <Grid item md={3} xs={12}>
+              <Grid item md={3} xs={12} sx={{ mb: 1, display: 'flex', gap: 1 }}>
                 <TextField
                   defaultValue={props.selectedItem.salary_end}
                   id='salary_end'
@@ -705,7 +723,7 @@ const DialogEdit = (props: EditProps) => {
                 />
               </Grid>
               {disabled == true && (
-                <Grid item md={2} xs={12} sx={{ mb: 1 }}>
+                <Grid item md={3} xs={12} sx={{ mb: 1 }}>
                   <Autocomplete
                     disablePortal
                     id='rotational'
