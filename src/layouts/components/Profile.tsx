@@ -121,7 +121,7 @@ const Profile = (props: userProps) => {
                     objectFit: 'cover',
                     marginTop: isMobile ? '25px' : '40px'
                   }}
-                  alt='profile-picture'
+                  alt={props.datauser?.name || 'User Avatar'}
                 />
               </Link>
             </Box>

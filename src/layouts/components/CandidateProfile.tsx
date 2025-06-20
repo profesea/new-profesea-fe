@@ -774,7 +774,7 @@ const CandidateProfile = (props: compProps) => {
           <ProfilePicture
             id='profile-picture-frame'
             src={preview ? preview : '/images/avatars/profilepic.png'}
-            alt='profile-picture'
+            alt={props.datauser.name}
             sx={{ width: 100, height: 100, objectFit: 'cover' }}
           ></ProfilePicture>
           <Box position={'absolute'} right={'40%'} bottom={'40%'}>

@@ -134,7 +134,7 @@ const OurFeatureView = () => {
         <Box
           component='img'
           src='/images/profesea-feature.gif'
-          alt='profesea-feature'
+          alt='Profesea as Training Platform'
           sx={{
             width: { xs: '400px', md: '100%' },
             height: 'auto',

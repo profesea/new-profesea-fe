@@ -235,7 +235,11 @@ const PostFeedDialog: React.FC<IPostFeedDialog> = ({
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: '24px', mt: '20px' }}>
             <Box sx={{ display: 'flex', flexDirection: 'row', gap: 3 }}>
               <Box>
-                <Avatar src={getUserAvatar(user!)} alt='profile-picture' sx={{ height: 50, width: 50 }} />
+                <Avatar
+                  src={getUserAvatar(user!)}
+                  alt={user?.name || 'Profile Picture'}
+                  sx={{ height: 50, width: 50 }}
+                />
               </Box>
               <Box sx={{ display: 'flex', flexDirection: 'column', gap: '5px', justifyContent: 'center' }}>
                 <Typography

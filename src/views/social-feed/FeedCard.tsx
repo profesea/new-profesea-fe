@@ -46,7 +46,7 @@ const FeedCard = (props: Prop) => {
               <Avatar
                 component={Link}
                 href={profileLink}
-                alt='profile-picture'
+                alt={item.user.name || 'User Avatar'}
                 src={getUserAvatar(item.user)}
                 sx={{ width: 36, height: 36 }}
               />

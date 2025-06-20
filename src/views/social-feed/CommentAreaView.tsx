@@ -41,7 +41,7 @@ const CommentCard = (props: { comment: ISocialFeedComment; feedId: number }) => 
         href={`/${comment.user?.role === 'Seafarer' ? 'profile' : 'company'}/${toLinkCase(comment.user?.username)}`}
         sx={{ display: 'flex', alignItems: 'center', gap: '8px' }}
       >
-        <Avatar sx={{ width: 36, height: 36 }} src={getUserAvatar(comment.user)} alt='profile-picture' />
+        <Avatar sx={{ width: 36, height: 36 }} src={getUserAvatar(comment.user)} alt={comment.user?.name} />
         <Typography variant='body2' sx={{ color: 'black', fontSize: 14, fontWeight: 700 }}>
           {toTitleCase(comment.user.name)}
         </Typography>
@@ -156,7 +156,7 @@ const CommentAreaView = (props: { item: ISocialFeed; placement?: 'popup' }) => {
             ))}
           </Stack>
         )}
-        {user.team_id !== 1 && <CommentForm feedId={item.id} replyable_type='feed' main_feed_id={item.id}/>}
+        {user.team_id !== 1 && <CommentForm feedId={item.id} replyable_type='feed' main_feed_id={item.id} />}
       </Box>
     )
 

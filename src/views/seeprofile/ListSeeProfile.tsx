@@ -33,7 +33,7 @@ const renderList = (listCandidate: any[]) => {
         >
           <Grid item container xs={12} md={12}>
             <Grid xs={2} md={1.8}>
-              <Avatar sx={{ width: 50, height: 50 }} src={userPhoto} alt='profile-picture' />
+              <Avatar sx={{ width: 50, height: 50 }} src={userPhoto} alt={item.viewer?.name || 'User Avatar'} />
             </Grid>
             <Grid xs={10} md={10}>
               <Link

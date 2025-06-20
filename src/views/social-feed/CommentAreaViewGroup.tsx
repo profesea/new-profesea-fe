@@ -23,7 +23,7 @@ const CommentCard = (props: { comment: ISocialFeedComment }) => {
           <Avatar
             sx={{ width: 35, height: 35, mr: 3, mb: 3 }}
             src={getUserAvatar(comment.user)}
-            alt='profile-picture'
+            alt={comment.user.name || 'User Avatar'}
           />
         </Box>
         <Box sx={{ mb: [6, 0], display: 'flex', flexDirection: 'column', alignItems: ['center', 'flex-start'] }}>
@@ -90,7 +90,7 @@ const CommentAreaViewGroup = (props: { item: ISocialFeed }) => {
 
   return (
     <>
-      <CommentFormGroup feedId={item.id} replyable_type='feed' main_feed_id={item.id}/>
+      <CommentFormGroup feedId={item.id} replyable_type='feed' main_feed_id={item.id} />
       {onLoading && (
         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mt: 10 }}>
           <CircularProgress />

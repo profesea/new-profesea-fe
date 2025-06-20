@@ -43,7 +43,7 @@ const FooterView = () => {
           <Box
             component='img'
             sx={{ width: 145 }}
-            alt='The Profesea logo'
+            alt='Profesea for Professionals'
             title='Profesea'
             src='/images/logoprofesea.png'
           />

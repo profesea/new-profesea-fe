@@ -1,7 +1,7 @@
 {
   "translation": {
     "app_keyword": "Job, candidate, Recruiter, Maritime industry jobs, Career, Seafarer",
-    "landing_hero_title": "Profesea: Best Work Platform",
+    "landing_hero_title": "Maritime & Logistics Ecosystem Solutions",
     "landing_hero_subtitle": "Profesea adalah platform lokerja khusus untuk industri maritim, logistik, dan pelaut, menyediakan lowongan kerja dan pelatihan terbaik.",
     "landing_about_title": "About Us",
     "landing_about_subtitle": "Profesea is Seafarer and Vessel match platform that provides featured and rapid candidate sourcing for Maritime Industry. Companies and employees have a chance to choose specific-technical options and detailed criterias via Profesea. Main goal is to help personnel & HR managers find suitable seafarers for their companies quickly and easily.",
@@ -13,10 +13,12 @@
     "landing_job_subtitle": "Connect with your dream companies, without the help of insiders",
     "landing_employer_title": "Kandidat Pelaut Terbaik untuk Perusahaan",
     "landing_employer_description": "Temukan kandidat terbaik untuk perusahaan maritim dan logistik Anda melalui platform pencarian Profesea.",
+    "landing_employer_keywords": "Candidate, Recruiter, Maritime industry jobs",
     "landing_findjob_title": "Lowongan Kerja Terbaru di Profesea",
     "landing_findjob_description": "Cari lowongan kerja terbaru di industri maritim dan logistik. Temukan peluang karier yang sesuai dengan keahlian Anda.",
     "landing_news_title": "Berita Maritim dan Logistik Terkini",
-    "landing_news_description": "Dapatkan berita terbaru dan update industri maritim dan logistik hanya di Profesea News.",
+    "landing_news_description": "Dapatkan berita terbaru di industri maritim dan logistik hanya di Profesea News.",
+    "landing_news_keyword": "Berita maritim dan logistik, Berita terbaru",
     "landing_training_title": "Sertifikasi Pelaut dan Pelatihan",
     "landing_training_description": "Ikuti sertifikasi pelaut dan pelatihan profesional untuk meningkatkan keterampilan dan karier Anda di industri maritim.",
     "register_seafarer_title": "Lowongan Pelaut On-Ship Terbaru",
@@ -64,7 +66,7 @@
     "landing_footer_menu_5": "FAQ",
     "landing_footer_menu_6": "Candidate",
     "landing_footer_menu_7": "Company",
-    "landing_footer_menu_8": "Trainer",
+    "landing_footer_menu_8": "Training Center",
     "landing_footer_menu_9": "Find Us",
     "landing_footer_menu_10": "News",
     "landing_event_title": "Upcoming Events",
@@ -390,7 +392,7 @@
         "basic": {
           "description": "Start simple with the option to grow anytime.",
           "button": "Current Plan",
-          "benefit_4" : "Limited to 5 job postings"
+          "benefit_4": "Limited to 5 job postings"
         },
         "plus": {
           "description": "Unlimited Access to Advanced Features.",
@@ -410,10 +412,10 @@
           "faq_title": "Frequently Asked Questions",
           "question_1": "What is the open trial period?",
           "answer_1": " It's a phase where all companies can try the Plus plan for free and without a deadline.",
-          "question_2" : "Do I need to provide payment details to upgrade?",
+          "question_2": "Do I need to provide payment details to upgrade?",
           "answer_2": "Nope! Just click the upgrade button – no credit card needed.",
           "question_3": "How long will the trial last?",
-          "answer_3" : "There’s no end date for now. We’ll notify you in advance when changes happen.",
+          "answer_3": "There’s no end date for now. We’ll notify you in advance when changes happen.",
           "question_4": "What happens when the trial ends?",
           "answer_4": "We'll introduce paid options. You can choose to stay on Basic or move to a paid Plus plan."
         }

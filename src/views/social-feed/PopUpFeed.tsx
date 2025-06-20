@@ -89,7 +89,7 @@ const PopUpFeed = (props: Prop) => {
                 <Avatar
                   component={Link}
                   href={profileLink}
-                  alt='profile-picture'
+                  alt={feed.user.name || 'User Avatar'}
                   src={getUserAvatar(feed.user)}
                   sx={{ width: 36, height: 36 }}
                 />

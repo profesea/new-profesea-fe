@@ -213,6 +213,8 @@ const Company = () => {
         onCloseClick={() => setOpenUpdateProfilePic(!openUpateProfilePic)}
         previewProfile={profilePic}
       />
+      <h1 style={{ display: 'none' }}> Rekrut Talenta Maritim Terbaik </h1>
+      <h2 style={{ display: 'none' }}> Satu Platform, Solusi untuk Industri Maritim.</h2>
       <Grid
         container
         sx={

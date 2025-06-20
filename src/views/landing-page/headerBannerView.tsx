@@ -75,7 +75,7 @@ const HeaderBannerView = () => {
         <Box
           component='img'
           src='/images/landing-page-header.png'
-          alt='what-is-profesea?'
+          alt='Profesea for Employers'
           sx={{ width: { xs: '327px', md: '100%' } }}
         />
       </Grid>

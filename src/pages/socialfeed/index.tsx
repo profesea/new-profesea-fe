@@ -67,6 +67,8 @@ const SocialFeedApp = () => {
             marginBottom: '16px'
           }}
         >
+          <h1 style={{ display: 'none' }}> Platform Kerja Untuk Pelaut </h1>
+          <h2 style={{ display: 'none' }}> Platform rekrutmen perusahaan</h2>
           <Box sx={{ display: 'flex', gap: '10px', alignItems: 'center', flexDirection: isMobile ? 'column' : 'row' }}>
             <Box>
               <Icon icon='simple-line-icons:check' color='rgba(76, 175, 80, 1)' fontSize={32} />
@@ -271,7 +273,7 @@ const SocialFeedApp = () => {
                   <Box
                     component='img'
                     sx={{ width: 85 }}
-                    alt='The Profesea logo'
+                    alt='Profesea for Seafarers'
                     title='Profesea'
                     src='/images/logoprofesea.png'
                   />

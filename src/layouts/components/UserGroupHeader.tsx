@@ -113,7 +113,7 @@ const UserProfileHeader = (props: userProps) => {
       <Box>
         <ProfilePicture
           src={datagroup?.profilepicture ? base_url + '/storage/' + datagroup?.profilepicture : '/images/avatars/1.png'}
-          alt='profile-picture'
+          alt={datagroup?.title || 'User Avatar'}
           sx={{
             top: 300,
             left: 50,

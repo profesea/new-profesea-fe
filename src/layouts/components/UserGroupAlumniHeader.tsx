@@ -86,7 +86,7 @@ const UserProfileHeader = (props: userProps) => {
             src={
               dataalumni.profilepicture ? base_url + '/storage/' + dataalumni.profilepicture : '/images/avatars/1.png'
             }
-            alt='profile-picture'
+            alt={dataalumni.user.name || 'User Avatar'}
             sx={{
               width: 100,
               height: 100,

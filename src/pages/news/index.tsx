@@ -140,7 +140,7 @@ const NewsPage = () => {
         <meta property='og:description' content={`${t('landing_news_description')}`} />
         <meta property='og:image' content='images/logoprofesea.png' />
         <meta name='description' content={`${t('landing_news_description')}`} />
-        <meta name='keywords' content={`${t('app_keyword')}`} />
+        <meta name='keywords' content={`${t('landing_news_keyword')}`} />
         <meta name='viewport' content='initial-scale=0.8, width=device-width' />
       </Head>
 
@@ -149,6 +149,8 @@ const NewsPage = () => {
           px: { xs: '24px', md: '120px' }
         }}
       >
+        <h1 style={{ display: 'none' }}>Berita Maritim Terbaru</h1>
+        <h2 style={{ display: 'none' }}>Berita Logistik Terbaru</h2>
         <Box
           sx={{
             my: '24px'
@@ -191,7 +193,7 @@ const NewsPage = () => {
                   <HighlightedCardNews
                     key={d?.category?.name + i}
                     category={d?.category?.name}
-                    title={i18n?.language == 'en' ? d?.title_eng ? d?.title_eng : d?.title : d?.title}
+                    title={i18n?.language == 'en' ? (d?.title_eng ? d?.title_eng : d?.title) : d?.title}
                     description={d?.snap_content}
                     image={d?.imgnews[0]}
                     postDate={d?.posting_at}

@@ -83,7 +83,7 @@ const ButtonUpdate = (props: { item: ISocialFeed; variant?: 'no-icon' | 'setting
         <DialogContent>
           <Box sx={{ display: 'flex', flexDirection: 'row' }}>
             <Box mr={3} mt={1}>
-              <Avatar src={getUserAvatar(user!)} alt='profile-picture' sx={{ height: 50, width: 50 }} />
+              <Avatar src={getUserAvatar(user!)} alt={user?.name} sx={{ height: 50, width: 50 }} />
             </Box>
             <Box sx={{ flexGrow: 1 }}>
               <TextField

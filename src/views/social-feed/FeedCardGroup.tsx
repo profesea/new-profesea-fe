@@ -39,7 +39,11 @@ const FeedCardGroup = (props: Prop) => {
         sx={{ display: 'flex', '& svg': { color: 'text.secondary' }, height: 60 }}
       >
         <Box>
-          <Avatar sx={{ width: 50, height: 50, mr: 3, mb: 3 }} src={getUserAvatar(item.user)} alt='profile-picture' />
+          <Avatar
+            sx={{ width: 50, height: 50, mr: 3, mb: 3 }}
+            src={getUserAvatar(item.user)}
+            alt={item.user.name || 'User Avatar'}
+          />
         </Box>
         <Box sx={{ mb: 8, display: 'flex', flexDirection: 'column', alignItems: 'start' }}>
           <Typography variant='body2' sx={{ color: '#0a66c2', fontWeight: 600, fontSize: '14px' }}>

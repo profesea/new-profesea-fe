@@ -19,7 +19,7 @@ const SubCommentCardGroup = (props: { comment: ISocialFeedComment }) => {
           <Avatar
             sx={{ width: 35, height: 35, mr: 3, mb: 3 }}
             src={getUserAvatar(comment.user)}
-            alt='profile-picture'
+            alt={comment.user.name || 'User Avatar'}
           />
         </Box>
         <Box sx={{ mb: [6, 0], display: 'flex', flexDirection: 'column', alignItems: ['center', 'flex-start'] }}>
@@ -87,7 +87,7 @@ const SubCommentAreaViewGroup = (props: { item: ISocialFeedComment }) => {
         </Box>
       )}
 
-      <CommentFormGroup feedId={item.id} replyable_type='comment' main_feed_id={item.replyable_id}/>
+      <CommentFormGroup feedId={item.id} replyable_type='comment' main_feed_id={item.replyable_id} />
     </Box>
   )
 }

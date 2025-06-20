@@ -85,7 +85,7 @@ const LandingPageAppBar = (props: { appBarElevation?: number }) => {
         { title: t('landing_menu_9'), path: baseAddress9 },
         { title: t('landing_menu_7'), path: baseAddress7 },
         // pricing untuk sementara di hide dulu
-        { title: t('landing_menu_8'), path: baseAddress8 },
+        { title: t('landing_menu_8'), path: baseAddress8 }
       ])
     } else {
       setHomeNavItems([
@@ -183,7 +183,7 @@ const LandingPageAppBar = (props: { appBarElevation?: number }) => {
                   <Box
                     component='img'
                     sx={{ width: 125, marginLeft: 5 }}
-                    alt='The Profesea logo'
+                    alt='Profesea for Professionals'
                     title='Profesea'
                     src='/images/logoprofesea.png'
                   />
@@ -285,7 +285,7 @@ const LandingPageAppBar = (props: { appBarElevation?: number }) => {
                   <Box
                     component='img'
                     sx={{ width: 125 }}
-                    alt='The Profesea logo'
+                    alt='The Profesea Professionals'
                     title='Profesea'
                     src='/images/logoprofesea.png'
                   />

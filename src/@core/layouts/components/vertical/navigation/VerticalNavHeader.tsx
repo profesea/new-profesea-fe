@@ -70,7 +70,7 @@ const VerticalNavHeader = (props: Props) => {
           <Box
             component='img'
             sx={{ width: 125 }}
-            alt='The Profesea logo'
+            alt='Profesea for Seafarers'
             title='Profesea'
             src='/images/logoprofesea.png'
           />

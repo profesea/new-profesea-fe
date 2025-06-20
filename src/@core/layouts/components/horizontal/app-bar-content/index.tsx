@@ -3,7 +3,6 @@ import Box from '@mui/material/Box'
 import { styled } from '@mui/material/styles'
 import { LayoutProps } from 'src/@core/layouts/types'
 
-
 interface Props {
   hidden: LayoutProps['hidden']
   settings: LayoutProps['settings']
@@ -22,7 +21,6 @@ const LinkStyled = styled(Link)(() => ({
 const AppBarContent = (props: Props) => {
   const { appBarContent: userAppBarContent, appBarBranding: userAppBarBranding } = props
 
-
   return (
     <Box sx={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
       {userAppBarBranding ? (
@@ -32,7 +30,7 @@ const AppBarContent = (props: Props) => {
           <Box
             component='img'
             sx={{ width: 125 }}
-            alt='The Profesea logo'
+            alt='Profesea for Seafarers'
             title='Profesea'
             src='/images/logoprofesea.png'
           />

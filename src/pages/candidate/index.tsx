@@ -628,6 +628,8 @@ const Candidate = () => {
   return (
     <>
       <ProfileCompletionProvider>
+      <h1 style={{ display:'none'}}> Platform Kerja Untuk Pelaut </h1>
+      <h2 style={{ display:'none'}}> Platform rekrutmen perusahaan</h2>
         <DialogEditBanner
           visible={openEditModalBanner}
           onCloseClick={() => setOpenEditModalBanner(!openEditModalBanner)}

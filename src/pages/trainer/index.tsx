@@ -78,6 +78,8 @@ const Company = () => {
 
   return (
     <Box  >
+      <h1 style={{ display:'none'}}> Platform Kerja Untuk Pelaut </h1>
+      <h2 style={{ display:'none'}}> Platform rekrutmen perusahaan</h2>
       <Grid container spacing={2}>
         <Grid item xs={12} md={12}
           sx={!hidden ? {

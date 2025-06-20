@@ -27,7 +27,11 @@ const SubCommentCard = (props: { comment: ISocialFeedComment; feedId: number }) 
         href={`/${comment.user?.role === 'Seafarer' ? 'profile' : 'company'}/${toLinkCase(comment.user?.username)}`}
         sx={{ display: 'flex', alignItems: 'center', gap: '8px' }}
       >
-        <Avatar sx={{ width: 36, height: 36 }} src={getUserAvatar(comment.user)} alt='profile-picture' />
+        <Avatar
+          sx={{ width: 36, height: 36 }}
+          src={getUserAvatar(comment.user)}
+          alt={comment.user.name || 'User Avatar'}
+        />
         <Typography variant='body2' sx={{ color: 'black', fontSize: 14, fontWeight: 700 }}>
           {toTitleCase(comment.user.name)}
         </Typography>
@@ -72,7 +76,7 @@ const SubCommentCard = (props: { comment: ISocialFeedComment; feedId: number }) 
 
 const SubCommentAreaView = (props: { item: ISocialFeedComment; feedId: number }) => {
   const { item, feedId } = props
-  console.log('subcommentarea: ',item)
+  console.log('subcommentarea: ', item)
   const [onLoading, setOnLoading] = useState(true)
   const { getComments, subCommentSignature } = useSocialFeed()
   const [commentObj, setCommentObj] = useState<CommentResponseType>()
@@ -97,7 +101,7 @@ const SubCommentAreaView = (props: { item: ISocialFeedComment; feedId: number })
           ))}
         </Box>
       )}
-      <CommentForm feedId={item.id} replyable_type='comment' main_feed_id={item.replyable_id}/>
+      <CommentForm feedId={item.id} replyable_type='comment' main_feed_id={item.replyable_id} />
       {onLoading && (
         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mt: 10 }}>
           <CircularProgress />

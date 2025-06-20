@@ -19,7 +19,7 @@ const SubCommentCardAlumni = (props: { comment: ISocialFeedComment }) => {
           <Avatar
             sx={{ width: 35, height: 35, mr: 3, mb: 3 }}
             src={getUserAvatar(comment.user)}
-            alt='profile-picture'
+            alt={comment.user.name || 'User Avatar'}
           />
         </Box>
         <Box sx={{ mb: [6, 0], display: 'flex', flexDirection: 'column', alignItems: ['center', 'flex-start'] }}>

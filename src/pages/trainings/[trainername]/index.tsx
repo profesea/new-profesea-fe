@@ -50,7 +50,7 @@ const Main = () => {
       <Head>
         <title>{`${themeConfig.templateName} - ${t('landing_training_title')}`}</title>
         <meta name='description' content={`${themeConfig.templateName} - ${t('landing_training_description')}`} />
-        <meta name='keywords' content={`${t('app_keyword')}`} />
+        <meta name='keywords' content={`Sertifikasi pelaut, training pelaut`} />
         <meta name='viewport' content='initial-scale=0.8, width=device-width' />
         <meta name='og:title' content={`${themeConfig.templateName} - ${t('landing_training_title')}`} />
         <meta name='og:description' content={`${themeConfig.templateName} - ${t('landing_training_description')}`} />
@@ -69,6 +69,8 @@ const Main = () => {
           mb: '24px'
         }}
       >
+         <h1 style={{ display:'none'}}> Sertifikasi Pelaut </h1>
+         <h2 style={{ display:'none'}}> Sertifikasi Pelaut dan Profesional </h2>
         <TrainingPartnerSection />
         {trainername == 'all' && (
           <>

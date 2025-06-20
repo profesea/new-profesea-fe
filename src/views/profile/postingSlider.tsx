@@ -77,7 +77,11 @@ const Slides = (items: any[], teamId: number, width: number, status: boolean) =>
               }}
             >
               <Box sx={{ display: 'flex', justifyContent: 'center' }} mt={3} ml={2} mr={3}>
-                <Avatar src={getUserAvatar(arr.trainer)} alt='profile-picture' sx={{ width: 25, height: 25 }} />
+                <Avatar
+                  src={getUserAvatar(arr.trainer)}
+                  alt={arr.trainer.name || 'User Avatar'}
+                  sx={{ width: 25, height: 25 }}
+                />
               </Box>
               <Box
                 sx={{ display: 'flex', flexDirection: 'column', alignItems: ['center', 'flex-start'] }}

@@ -56,9 +56,9 @@ const JobDetail = () => {
       const resp = await HttpClient.get(`/public/data/job/${companyname}/${jobId}/${jobTitle}`)
       const job = await resp.data.job
       await setTitle(
-        `Lowongan ${
-          job.category.employee_type == 'onship' ? job.role_type.name ?? '' : job.job_title ?? job.role_type.name
-        } ${job.category.name} di Profesea`
+        `${job.category.employee_type == 'onship' ? job.role_type.name ?? '' : job.job_title ?? job.role_type.name} ${
+          job.category.name
+        } - ${job.company.name} | Profesea`
       )
       setJobDetail(job)
       setIsLoading(false)
@@ -148,7 +148,10 @@ const JobDetail = () => {
       <Head>
         <title>{title}</title>
         <meta property='og:title' content={title} />
-        <meta property='og:description' content={jobDetail?.description} />
+        <meta
+          property='og:description'
+          content={`Cari lowongan "${jobtitle}" di ${jobDetail?.company.name}. Temukan peluang karier di industri maritim dan logistik dengan Profesea.`}
+        />
         <meta property='og:image' content='images/logoprofesea.png' />
         <meta name='keywords' content={`${t('app_keyword')}`} />
         <meta name='viewport' content='initial-scale=0.8, width=device-width' />
@@ -156,7 +159,7 @@ const JobDetail = () => {
       </Head>
 
       <Box sx={{ position: 'relative' }}>
-
+        <h1>{jobDetail?.job_title ? jobDetail?.job_title : jobDetail?.role_type?.name}</h1>
         <Grid container sx={{ position: 'absolute', top: '12px', left: '-72px' }}>
           <IconButton onClick={() => router.push('/find-job')}>
             <FontAwesomeIcon icon={faArrowLeft} color='text.primary' />
@@ -249,9 +252,14 @@ const JobDetail = () => {
             <CompanyDetailSection isMobile={isMobile} user={user} jobDetail={jobDetail} />
           </Grid>
           {jobDetailSugestion.length !== 0 && (
-            <Grid item xs={12} md={4} sx={{
-              padding: '0px !important'
-            }}>
+            <Grid
+              item
+              xs={12}
+              md={4}
+              sx={{
+                padding: '0px !important'
+              }}
+            >
               <Box
                 sx={{
                   display: 'flex',

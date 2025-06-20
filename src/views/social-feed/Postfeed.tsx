@@ -199,7 +199,7 @@ const Postfeed = () => {
           sx={{ display: 'flex', flexDirection: 'row', borderBottom: '1px solid rgba(219, 219, 219, 1)', pb: '10px' }}
         >
           <Box mr={3} mt={1}>
-            <Avatar src={getUserAvatar(user!)} alt='profile-picture' sx={{ height: 50, width: 50 }} />
+            <Avatar src={getUserAvatar(user!)} alt={user?.name || 'User Avatar'} sx={{ height: 50, width: 50 }} />
           </Box>
           <Box
             sx={{

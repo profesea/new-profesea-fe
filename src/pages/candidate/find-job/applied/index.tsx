@@ -269,7 +269,11 @@ const AllJobApplied = () => {
                   flexGrow: 1
                 }}
               >
-                <Avatar src={companyPhoto} alt='profile-picture' sx={{ width: 50, height: 50, mr: 2 }} />
+                <Avatar
+                  src={companyPhoto}
+                  alt={item?.job?.company?.name || 'Company Avatar'}
+                  sx={{ width: 50, height: 50, mr: 2 }}
+                />
                 <Box
                   sx={{
                     display: 'flex',

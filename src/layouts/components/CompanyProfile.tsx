@@ -510,7 +510,7 @@ const CompanyProfile = (props: compProps) => {
           >
             <ProfilePicture
               src={preview ? preview : '/images/avatars/profilepic.png'}
-              alt='profile-picture'
+              alt={props.datauser.name || 'User Avatar'}
             ></ProfilePicture>
 
             <Box position={'absolute'} right={'40%'} bottom={'40%'}>
